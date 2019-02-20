@@ -1,0 +1,38 @@
+{% import '_fn.html' as fn %}
+{% include 'header.html' %}
+
+                <div class="row justify-content-center">
+                    <form method="get" action="search/" class="col-sm-8">
+                        <input type="search" name="q" class="form-control input-lg" title="Search customers" placeholder="Search customers..." />
+                    </form>
+                </div>
+                
+                <div class="row justify-content-center my-30">
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <a data-toggle="tooltip" data-placement="bottom" href="customers/" title="View all customers" class="btn btn-block btn-default btn-dashboard">
+                                    <i class="ion-person-stalker"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a data-toggle="tooltip" data-placement="bottom" href="checklist/" title="View weekly checklist" class="btn btn-block btn-default btn-dashboard">
+                                    <i class="ion-clipboard"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a data-toggle="tooltip" data-placement="bottom" href="tasklist/" title="View tasklist" class="btn btn-block btn-default btn-dashboard">
+                                    <i class="ion-android-checkbox-outline"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <style>
+                .btn-dashboard   { background: #fff; }
+                .btn-dashboard i { font-size: 7rem; }
+                </style>
+            
+
+{% include 'footer.html' %}

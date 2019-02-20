@@ -1,0 +1,62 @@
+{% import '_fn.html' as fn %}
+{% include 'header.html' %}
+
+                <div class="card">
+                    <header class="card-header">
+                        <h3 class="card-header-title">Users</h3>
+                        <div class="card-header-actions">
+                            <a href="{{ fn.base_url('users/create/') }}" class="btn btn-sm btn-success mr-20" title="Create new team member">Create team member</a>
+                            {{ fn.pagination(pagination, false) }}
+                        </div>
+                    </header>
+                    
+                    {% if alert is defined %}
+                    <div class="mb-30 alert alert-{{ alert.class }}">{{ alert.text }}</div>
+                    {% endif %}
+                
+                    <div class="table-responsive mb-30">
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th width="30%">Name</th>
+                                    <th>Email</th>
+                                    <th width="15%">Created</th>
+                                    <th class="text-center" width="10%">Role</th>
+                                    <th width="10%">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for userItem in users %}
+                                <tr>
+                                    <td>{{ userItem.forename }} {{ userItem.surname }}</td>
+                                    <td><a href="mailto:{{ userItem.email }}" title="Send an email to {{ userItem.forename }} {{ userItem.surname }}">{{ userItem.email }}</a></td>
+                                    <td>{{ userItem.registered|date('d-m-Y') }}</td>
+                                    <td>
+                                        {% if userItem.role == 'admin' %}
+                                        <span class="label label-block label-secondary">Admin</span>
+                                        {% else %}
+                                        <span class="label label-block label-default">Staff</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-default btn-block btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="{{ fn.base_url('users/' ~ userItem.id) }}/" title="Edit this user">Edit</a>
+                                                {% if userItem.id != user.id %}
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-danger action-confirm" data-verb="Delete" data-noun="user" title="Delete this user" href="{{ fn.base_url('users/' ~ userItem.id ~ '/delete') }}/">Delete</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    {{ fn.pagination(pagination) }}
+                </div>
+
+{% include 'footer.html' %}

@@ -1,0 +1,9 @@
+{
+    "require": {
+        "slim/slim": "^3.12",
+        "gabordemooij/redbean": "^5.2",
+        "martynbiz/slim3-controller": "^0.0.0",
+        "slim/twig-view": "^2.4",
+        "firebase/php-jwt": "^5.0"
+    }
+}

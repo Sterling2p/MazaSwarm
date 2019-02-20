@@ -1,0 +1,22 @@
+{% import '_fn.html' as fn %}
+
+            </main>
+            <!-- /#content -->
+            
+        </div>
+        <!-- /#wrapper -->
+                
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/nanobar/0.4.2/nanobar.js"></script>
+        
+        {{ fn.asset('jquery-ui.min.js') }}
+        {{ fn.asset('app.js') }}
+        {{ fn.asset('wysiwyg.js') }}
+        {{ fn.asset('form.custom.js') }}
+        {{ fn.asset('notifications.js') }}
+        
+        <script>$(".table-responsive").on("show.bs.dropdown",".dropdown",function(o){var n=$(this).children(".dropdown-menu"),d=$(this).children(".dropdown-toggle"),t=$(this).offset().top+d.outerHeight(!0,!0);$(this).data("dropdown-menu",n),n.appendTo("body"),window.setTimeout(function(){var o=n.css("transform").split(","),d=parseInt(o[o.length-1]),s=Math.max(0,t-d);n.css("top",s)},1)}).on("hidden.bs.dropdown",".dropdown",function(){$(this).data("dropdown-menu").appendTo($(this))});</script>
+    </body>
+</html>

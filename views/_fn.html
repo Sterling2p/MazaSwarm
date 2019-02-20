@@ -1,0 +1,207 @@
+<!-- Output an asset: !-->
+{% macro asset(path) %}
+{% if path ends with '.css' %}
+<link rel="stylesheet" type="text/css" href="{{ base_dir }}{{ css_dir }}{{ path }}" />
+{% elseif path ends with '.js' %}
+<script src="{{ base_dir }}{{ js_dir }}{{ path }}"></script>
+{% endif %}
+{% endmacro %}
+
+<!-- Output a title attribute: -->
+{% macro title(title) %}
+<title>{{ title }} | {{ site_name }}</title>
+{% endmacro %}
+
+<!-- Output breadcrumbs: -->
+{% macro crumbs(crumbs) %}
+{% for crumb in crumbs %}
+{% if crumb.active %}
+<h1 class="masthead-crumbs__current" title="{{ crumb.title }}">{{ crumb.text }}</h1>
+{% elseif crumb.separator %}
+<span class="masthead-crumbs__sep"><i class="ion-ios-arrow-right"></i></span>
+{% else %}
+<a href="{{ crumb.url }}" title="{{ crumb.title }}" class="masthead-crumbs__link">{{ crumb.text }}</a>
+{% endif %}
+{% endfor %}
+{% endmacro %}
+
+<!-- Output a URL: -->
+{% macro base_url(path) %}
+{{ base_dir }}{{ admin_dir }}{{ path }}
+{% endmacro %}
+
+<!-- Pagination: -->
+{% macro pagination(pagination, text = true) %}
+
+{% if text != true %}
+<nav class="pull-right">
+    <ul class="pagination pagination-sm">
+        <li class="page-item{% if pagination.page == 1 %} disabled{% endif %}">
+            {% if (pagination.page - 1) == 0 %}
+            <a href="#" class="page-link">&larr;</a>
+            {% else %}
+            <a href="{{ base_url() }}{{ pagination.url|replace({'%page%': pagination.prevPage }) }}" class="page-link" title="Go to previous page ({{ pagination.prevPage }})">&larr;</a>
+            {% endif %}
+        </li>
+
+        {% for i in range(1, pagination.pages) if pagination.pages <= 9 %}
+        {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+        {% endfor %}
+
+        {% if pagination.pages > 9 %}
+            {% if pagination.page <= 3 %}
+
+                {% for i in range(1, 3) %}
+                {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                {% endfor %}
+
+                <li class="page-item disabled">
+                    <span class="page-link">&hellip;</span>
+                </li>
+
+                {% for i in range(pagination.pages - 1, pagination.pages) %}
+                {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                {% endfor %}
+
+            {% elseif pagination.page < pagination.pages - 3 %}
+
+                {% for i in range(1, 2) %}
+                {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                {% endfor %}
+
+                <li class="page-item disabled">
+                    <span class="page-link">&hellip;</span>
+                </li>
+
+                {% for i in range(pagination.page -1, pagination.page + 1) %}
+                {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                {% endfor %}
+
+                <li class="page-item disabled">
+                    <span class="page-link">&hellip;</span>
+                </li>
+
+                {% for i in range(pagination.pages - 1, pagination.pages) %}
+                {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                {% endfor %}
+
+            {% elseif pagination.page > pagination.pages - 3 %}
+
+                {% for i in range(1, 2) %}
+                {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                {% endfor %}
+
+                <li class="page-item disabled">
+                    <span class="page-link">&hellip;</span>
+                </li>
+                
+                {% for i in range(pagination.pages - 3, pagination.pages) %}
+                {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                {% endfor %}
+
+            {% endif %}
+        {% endif %}
+
+        <li class="page-item{% if pagination.page == pagination.pages %} disabled{% endif %}">
+            {% if (pagination.page + 1) > pagination.pages %}
+            <a href="#" class="page-link">&rarr;</a>
+            {% else %}
+            <a href="{{ base_url() }}{{ pagination.url|replace({'%page%': pagination.nextPage }) }}" class="page-link" title="Go to next page ({{ pagination.nextPage }})">&rarr;</a>
+            {% endif %}
+        </li>
+    </ul>
+</nav>
+{% else %}
+<div class="row">
+    <div class="col-sm-6">
+        <p>{{ pagination.text|raw }}</p>
+    </div>
+    <div class="col-sm-6">
+        <nav class="pull-right">
+            <ul class="pagination pagination-sm">
+                <li class="page-item{% if pagination.page == 1 %} disabled{% endif %}">
+                    {% if (pagination.page - 1) == 0 %}
+                    <a href="#" class="page-link">&larr;</a>
+                    {% else %}
+                    <a href="{{ base_url() }}{{ pagination.url|replace({'%page%': pagination.prevPage }) }}" class="page-link" title="Go to previous page ({{ pagination.prevPage }})">&larr;</a>
+                    {% endif %}
+                </li>
+        
+                {% for i in range(1, pagination.pages) if pagination.pages <= 9 %}
+                {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                {% endfor %}
+        
+                {% if pagination.pages > 9 %}
+                    {% if pagination.page <= 3 %}
+        
+                        {% for i in range(1, 3) %}
+                        {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                        {% endfor %}
+        
+                        <li class="page-item disabled">
+                            <span class="page-link">&hellip;</span>
+                        </li>
+        
+                        {% for i in range(pagination.pages - 1, pagination.pages) %}
+                        {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                        {% endfor %}
+        
+                    {% elseif pagination.page < pagination.pages - 3 %}
+        
+                        {% for i in range(1, 2) %}
+                        {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                        {% endfor %}
+        
+                        <li class="page-item disabled">
+                            <span class="page-link">&hellip;</span>
+                        </li>
+        
+                        {% for i in range(pagination.page -1, pagination.page + 1) %}
+                        {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                        {% endfor %}
+        
+                        <li class="page-item disabled">
+                            <span class="page-link">&hellip;</span>
+                        </li>
+        
+                        {% for i in range(pagination.pages - 1, pagination.pages) %}
+                        {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                        {% endfor %}
+        
+                    {% elseif pagination.page > pagination.pages - 3 %}
+        
+                        {% for i in range(1, 2) %}
+                        {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                        {% endfor %}
+        
+                        <li class="page-item disabled">
+                            <span class="page-link">&hellip;</span>
+                        </li>
+                        
+                        {% for i in range(pagination.pages - 3, pagination.pages) %}
+                        {{ _self.pagination_item(pagination.page, i, pagination.url) }}
+                        {% endfor %}
+        
+                    {% endif %}
+                {% endif %}
+        
+                <li class="page-item{% if pagination.page == pagination.pages %} disabled{% endif %}">
+                    {% if (pagination.page + 1) > pagination.pages %}
+                    <a href="#" class="page-link">&rarr;</a>
+                    {% else %}
+                    <a href="{{ base_url() }}{{ pagination.url|replace({'%page%': pagination.nextPage }) }}" class="page-link" title="Go to next page ({{ pagination.nextPage }})">&rarr;</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro pagination_item(current_page, index, path) %}
+    <li class="page-item{% if current_page == index %} active{% endif %}">
+        <a href="{{ base_url() }}{{ path|replace({'%page%': index }) }}" class="page-link" title="Jump to page {{ index }}">{{ index }}</a>
+    </li>
+{% endmacro %}
+<!-- /Pagination -->

@@ -1,0 +1,61 @@
+{% import '_fn.html' as fn %}
+{% include 'header.html' %}
+
+                <form class="section pt-0" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h4 class="section-title">User information</h4>
+                            <p class="section-explain">
+                                Basic profile information and login data for this user.
+                            </p>
+                        </div>
+                        <div class="col-sm-8">
+                            
+                            {% if alert is defined %}
+                            <div class="alert alert-{{ alert.class }}">{{ alert.text }}</div>
+                            {% endif %}
+                            
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col-sm-6 form-group">
+                                        <label for="input-forename">Forename:</label>
+                                        <input type="text" name="forename" id="input-forename" class="form-control" value="{{ form.forename }}" />
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label for="input-surname">Surname</label>
+                                        <input type="text" name="surname" id="input-surname" class="form-control" value="{{ form.surname }}" />
+                                    </div>
+                                </div>
+                                
+                                <div class="w-75 mt-10 form-group">
+                                    <label for="input-email">Email Address</label>
+                                    <input type="email" name="email" id="input-email" class="form-control" value="{{ form.email }}" />
+                                </div>
+                                
+                                <div class="row mt-20">
+                                    <div class="col-sm-6 form-group">
+                                        <label for="input-password1">Password</label>
+                                        <input type="password" name="password1" id="input-password1" class="form-control" />
+                                    </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label for="input-password2">Confirm password</label>
+                                        <input type="password" name="password2" id="input-password2" class="form-control" />
+                                    </div>
+                                </div>
+                                
+                                <div class="w-50 form-group mt-20">
+                                    <label for="select-user-role">User role</label>
+                                    
+                                    <select name="role" id="select-user-role" class="form-control">
+                                        <option value="admin"{% if form.role == 'admin' %} selected="selected"{% endif %}>Administrator</option>
+                                        <option value="staff"{% if form.role == 'staff' %} selected="selected"{% endif %}>Staff member</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" name="save" title="Save changes to this user" class="btn btn-primary pull-right mt-20">Save Changes</button>
+                </form>
+                
+{% include 'footer.html' %}

@@ -1,0 +1,52 @@
+{% import '_fn.html' as fn %}
+<!-- #sidebar: -->
+<aside id="sidebar">
+    <header class="sidebar-header">
+        
+    </header>
+    <nav class="sidebar-nav">
+        <ul class="list-unstyled">
+            
+            <li class="{% if nav.active == 'dashboard' %}sidebar-nav__item-active {% endif %}">
+                <a href="{{ fn.base_url('') }}" title="View responses" class="sidebar-nav__item">
+                    <i class="sidebar-nav__item-icon ion-speedometer"></i>
+                    <span class="sidebar-nav__item-text">Dashboard</span>
+                </a>
+            </li>
+            
+            {% if user.role != 'admin' %}
+            <li class="{% if nav.active == 'checklist' %} sidebar-nav__item-active {% endif %}">
+                <a href="{{ fn.base_url('jobs') }}/" title="Weekly Checklist" class="sidebar-nav__item">
+                    <i class="sidebar-nav__item-icon ion-clipboard"></i>
+                    <span class="sidebar-nav__item-text">My Jobs</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="{% if nav.active == 'checklist' %} sidebar-nav__item-active {% endif %}">
+                <a href="{{ fn.base_url('results') }}/" title="Weekly Checklist" class="sidebar-nav__item">
+                    <i class="sidebar-nav__item-icon ion-clipboard"></i>
+                    <span class="sidebar-nav__item-text">Results</span>
+                </a>
+            </li>
+            {% endif %}
+            
+            {% if user.role == 'admin' %}
+            <li class="{% if nav.active == 'users' %} sidebar-nav__item-active {% endif %}">
+                <a href="{{ fn.base_url('users') }}/" title="Manage Users" class="sidebar-nav__item">
+                    <i class="sidebar-nav__item-icon ion-person"></i>
+                    <span class="sidebar-nav__item-text">Users</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="{% if nav.active == 'users' %} sidebar-nav__item-active {% endif %}">
+                <a href="{{ fn.base_url('users') }}/{{ user.id }}/" title="Manage Customers" class="sidebar-nav__item">
+                    <i class="sidebar-nav__item-icon ion-person"></i>
+                    <span class="sidebar-nav__item-text">My Profile</span>
+                </a>
+            </li>
+            {% endif %}
+            
+        </ul>
+    </nav>
+</aside>
+<!-- /#sidebar -->

@@ -1,0 +1,36 @@
+{% import '_fn.html' as fn %}
+<!-- #masthead: -->
+<header id="masthead">
+    
+    <a href="#" class="masthead-sidebar-reveal">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    
+    <div class="masthead-left">
+        <div class="masthead-crumbs">
+            {{ fn.crumbs(breadcrumbs) }}
+        </div>
+    </div>
+    
+    <div class="masthead-search">
+        <input type="search" class="masthead-search-input" placeholder="Search the CMS..." />
+    </div>
+    
+    <div class="masthead-right">
+        <div class="masthead-actions"></div>
+        <div class="masthead-user dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="masthead-user__name">{{ user.forename }} {{ user.surname }}</span>
+                <i class="masthead-user__caret ion-chevron-down"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{ base_url() }}/users/{{ user.id }}/">Edit Profile</a>
+                <a class="dropdown-item" href="{{ base_url() }}/logout/">Logout</a>
+            </div>
+        </div>
+    </div>
+    
+</header>
+<!-- /#masthead -->

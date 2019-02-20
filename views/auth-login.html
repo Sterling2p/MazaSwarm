@@ -1,0 +1,74 @@
+{% import '_fn.html' as fn %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta charset="utf-8" />
+        
+        {{ fn.title(meta.title|raw) }}
+        
+        <!-- Fonts, icons and frameworks: -->
+        <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma:300" />
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        
+        {{ fn.asset('admin.css' )}}
+    </head>
+
+    <body class="">
+        
+        <div id="login-wrapper">
+            <aside id="login-sidebar">
+                
+            </aside>
+            
+            <main id="login-form">
+                <form class="login-form-container" method="post">
+                    <h1>
+                        {{ welcome_text }}! Welcome Back!
+                        <small>Use the form below to login</small>
+                    </h1>
+                    
+                    {% if alert is defined %}
+                    <div class="alert alert-{{ alert.class }} mb-30">{{ alert.text }}</div>
+                    {% endif %}
+                    
+                    <div class="mt-30 login-field{% if form.email is not empty %} has-value{% endif %}">
+                        <label class="login-field-label">Email address</label>
+                        <input type="email" name="email" class="login-field-input" value="{{ form.email }}" />
+                    </div>
+                    <div class="login-field">
+                        <label class="login-field-label">Password</label>
+                        <input type="password" name="password" class="login-field-input" />
+                        <a href="{{ base_dir }}password-reset/" title="Click here to reset your password" class="login-field-help">Forgotten?</a>
+                    </div>
+                    
+                    <div class="form-group-check custom-check mt-30 mb-30">
+                        <input type="checkbox" class="form-group-check__checkbox" id="input-remember" name="remember" value="1" />
+                        <label  class="form-group-check__label" for="input-remember">Remember Me</label>
+                    </div>
+                    
+                    <div class="row mt-20">
+                        <div class="col-sm-6">
+                            <button class="btn btn-primary btn-block" name="login">Login</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="{{ base_url }}register/" class="btn btn-outline btn-primary btn-block">Register</a>
+                        </div>
+                    </div>
+                </form>
+            </main>
+        </div>
+                
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.3/less.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        
+        {{ fn.asset('form.custom.js') }}
+        {{ fn.asset('page.login.js') }}
+    </body>
+</html>
